@@ -1,0 +1,44 @@
+
+
+
+
+
+
+
+X= preprocessing.StandardScaler().fit(X).transform(X)
+X[0:5]
+Y = test_df['loan_status'].values
+Y[0:5]
+
+
+
+Evaluation
+
+#test the KNN algorithm already trained with K=6
+yhatKNN=neigh.predict(X)
+KNNJaccard = jaccard_similarity_score(y, yhatKNN)
+KNNF1 = f1_score(y, yhatKNN, average='weighted')
+print("Avg F1-score: %.2f" % KNNF1 )
+print("KNN Jaccard Score: %.2f" % KNNJaccard)
+
+
+yhatDEC = Tree.predict(X)
+DTJaccard = jaccard_similarity_score(y, yhatDEC)
+DTF1 = f1_score(y, yhatDEC, average='weighted')
+print("Avg F1-score: %.2f" % DTF1 )
+print("Decision Tree Jaccard Score: %.2f" % DTJaccard)
+
+yhatSVM=clf.predict(X)
+SVMJaccard = jaccard_similarity_score(y, yhatSVM)
+SVMF1 = f1_score(y, yhatSVM, average='weighted')
+print("Avg F1-score: %.2f" % SVMF1)
+print("SVM Jaccard score: %.2f" % SVMJaccard)
+
+yhatLOG = LogR.predict(X)
+yhatLOGproba = LogR.predict_proba(X)
+LogRJaccard = jaccard_similarity_score(y, yhatLOG)
+LogRF1 = f1_score(y, yhatLOG, average='weighted')
+Logloss = log_loss(y, yhatLOGproba)
+print("LogLoss: : %.2f" % Logloss)
+print("Avg F1-score: %.4f" % LogRF1)
+print("LOG Jaccard score: %.4f" % LogRJaccard)
